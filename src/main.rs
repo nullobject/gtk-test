@@ -1,6 +1,6 @@
 use adw::prelude::*;
 use adw::{ActionRow, ApplicationWindow, HeaderBar};
-use gtk::{Application, Box, ListBox, Orientation, Align, Inhibit};
+use gtk::{Align, Application, Box, ListBox, Orientation};
 
 fn main() {
     let application = Application::builder()
@@ -8,7 +8,7 @@ fn main() {
         .build();
 
     application.connect_startup(|_| {
-        adw::init();
+        let _ = adw::init();
     });
 
     application.connect_activate(|app| {
@@ -19,7 +19,7 @@ fn main() {
             .build();
         switch.connect_state_set(|_, is_enabled| {
             println!("Switch! {}", is_enabled);
-            Inhibit(false)
+            false.into()
         });
 
         // ActionRows are only available in Adwaita
